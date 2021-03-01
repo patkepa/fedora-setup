@@ -10,13 +10,7 @@ readonly dnf_install=("install gnome-tweak-tool" "gnome-extensions-app" "cabextr
 readonly flatpak_install=("com.discordapp.Discord" "com.spotify.Client" "com.microsoft.Team" "org.telegram.desktop" "com.visualstudio.code" "com.github.tchx84.flatseal" "org.gimp.GIMP" "md.obsidian.Obsidian" "uk.co.mrbenshe.Boop-GTK" "com.getpostman.Postman"
 	"io.github.Qalculate" "org.kde.kdenlive")
 
-#TODO
-# INSTALL BASHRC
-# Add readable stuff like colored text when something happens and etc
-# ADD COLORS:
 
-#Change hostname
-hostnamectl set-hostname $hostname
 
 
 initial_check(){
@@ -70,6 +64,8 @@ install_resources(){
 	# rsync -r --progress resources/wallpaper.png /home/$username/Pictures/wallpaper.png
 	# dconf write /org/gnome/desktop/background/picture-uri "'file:///home/$username/Pictures/background.jpg'"
 		
+	#Change hostname
+	hostnamectl set-hostname $hostname
 }
 
 disable_services(){
