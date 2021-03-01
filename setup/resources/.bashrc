@@ -49,12 +49,10 @@ alias time=now
 alias cp="rsync -r --progress"
 alias mv="rsync -aP --remove-source-files"
 
-
 alias reload='source ~/.bashrc'
 
 
 # FUN
-alias fucking="sudo"
 alias weather="curl wttr.in/Rzeszów"
 
 on_startup()
