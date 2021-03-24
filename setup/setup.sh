@@ -130,8 +130,7 @@ dnf_tasks(){
 	### ASK WHETHER INSTALL TLP OR NOT
 	#install_tlp
 	
-	install_pipewire
-	# Comment out in F34 ^
+
 }
 
 
