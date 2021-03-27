@@ -10,7 +10,7 @@ Making dconf backups and restoring them.
 # Quick install
 ```bash
 git clone https://github.com/patryk-kepa/fedora-setup
-cd setup
+cd fedora-setup/setup
 sudo bash setup.sh
 ```
 
