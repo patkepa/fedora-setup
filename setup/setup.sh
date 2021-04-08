@@ -6,7 +6,7 @@ readonly hostname ${2}
 #readonly tlp ${3}
 
 readonly dnf_remove=("gnome-contacts" "gnome-photos" "rhytmbox" "totem" "firefox")
-readonly dnf_install=("install gnome-tweaks" "gnome-extensions-app" "cabextract lzip p7zip p7zip-plugins unrar" "vlc" "toolbox" "steam" "youtube-dl" "bat" "exa" "procs" "htop" "fd-find" )
+readonly dnf_install=("install gnome-tweaks" "gnome-extensions-app" "cabextract lzip p7zip p7zip-plugins unrar" "vlc" "toolbox" "steam" "youtube-dl" "bat" "exa" "procs" "htop" "fd-find" "ffmpegthumbnailer" )
 readonly flatpak_install=("com.discordapp.Discord" "com.spotify.Client" "com.microsoft.Team" "org.telegram.desktop" "com.visualstudio.code" "com.github.tchx84.flatseal" "org.gimp.GIMP" "md.obsidian.Obsidian" "uk.co.mrbenshe.Boop-GTK" "com.getpostman.Postman"
 	"io.github.Qalculate" "org.kde.kdenlive")
 
