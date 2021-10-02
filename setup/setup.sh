@@ -1,27 +1,15 @@
 #!/usr/bin/env bash
 
 # VARIABLES
-readonly username ${1}
-readonly hostname ${2}
-#readonly tlp ${3}
+readonly username =  who -m | awk '{print $1;}'
+
 
 readonly dnf_remove=("gnome-contacts" "gnome-photos" "rhytmbox" "totem" "firefox")
 readonly dnf_install=("install gnome-tweaks" "gnome-extensions-app" "cabextract lzip p7zip p7zip-plugins unrar" "vlc" "toolbox" "steam" "youtube-dl" "bat" "exa" "procs" "htop" "fd-find" "ffmpegthumbnailer" "ImageMagick")
 readonly flatpak_install=("com.discordapp.Discord" "com.spotify.Client" "com.microsoft.Team" "org.telegram.desktop" "com.visualstudio.code" "com.github.tchx84.flatseal" "org.gimp.GIMP" "md.obsidian.Obsidian" "uk.co.mrbenshe.Boop-GTK" "com.getpostman.Postman"
 	"io.github.Qalculate" "org.kde.kdenlive")
 
-
-
-
 initial_check(){
-# CHECK IF ARGUMENTS WERE PROVIDED
-if [ $# -eq 0 ] ; then
-    echo "Requires arguments:"
-    #echo "username hostname and whether to install TLP, for example:"
-    echo 'sudo bash setup "username" "hostname"'
-    exit 1
-fi
-
 # CHECK IF HOME FOLDER EXISTS
 if [ ! -d "/home/$username" ] 
 	then
@@ -51,21 +39,6 @@ install_resources(){
 	 cp -r Templates/* /home/$username/Templates
 	fi
 	#Sidenote: these files^ have root permissions, but it doesn't matter.
-	
-	# SET 
-	cp resources/.bashrc /home/.bashrc
-	# SET AVATAR
-	rsync -r --progress resources/avatar /var/lib/AccountsService/icons/$username
-	
-	#Check if it's needed to regex replace in user file in /var/lib/AccountsService/users/$username
-	# for avatar to work 
-	
-	# SET BACKGROUND
-	# rsync -r --progress resources/wallpaper.png /home/$username/Pictures/wallpaper.png
-	# dconf write /org/gnome/desktop/background/picture-uri "'file:///home/$username/Pictures/background.jpg'"
-		
-	#Change hostname
-	hostnamectl set-hostname $hostname
 }
 
 disable_services(){
@@ -73,27 +46,6 @@ disable_services(){
 	systemctl disable NetworkManager-wait-online.service #Wait for network at startup
 	systemctl mask lvm2-monitor.service #LVM service for managing partitions over several disks
 	systemctl disable ssd.service #For remote authentification like LDAP 
-}
-
-
-install_tlp(){
-	dnf -y install tlp tlp-rdw
-	
-	## Thinkpad specific TLP packages
-	dnf -y install https://repo.linrunner.de/fedora/tlp/repos/releases/tlp-release.fc$(rpm -E %fedora).noarch.rpm
-	dnf -y install kernel-devel akmod-acpi_call akmod-tp_smapi
-
-}
-install_pipewire(){
-	  dnf install pipewire-libpulse pipewire-libjack pipewire-alsa
-	  cd /usr/lib64/
-	  ln -sf pipewire-0.3/pulse/libpulse-mainloop-glib.so.0 /usr/lib64/libpulse-mainloop-glib.so.0.999.0
-	  ln -sf pipewire-0.3/pulse/libpulse-simple.so.0 /usr/lib64/libpulse-simple.so.0.999.0
-	  ln -sf pipewire-0.3/pulse/libpulse.so.0 /usr/lib64/libpulse.so.0.999.0
-	  ln -sf pipewire-0.3/jack/libjack.so.0 /usr/lib64/libjack.so.0.999.0
-	  ln -sf pipewire-0.3/jack/libjacknet.so.0 /usr/lib64/libjacknet.so.0.999.0
-	  ln -sf pipewire-0.3/jack/libjackserver.so.0 /usr/lib64/libjackserver.so.0.999.0
-	  ldconfig
 }
 
 dnf_tasks(){
@@ -123,18 +75,12 @@ dnf_tasks(){
 	for dr in "${dnf_remove[@]}"; do
 	 dnf -y remove "$dr"
 	done
+
 	#Install replacement fonts for proprietary ones (like Microsoft)
 	dnf copr enable dawid/better_fonts
 	dnf install -y fontconfig-enhanced-defaults fontconfig-font-replacements
 
-	### ASK WHETHER INSTALL TLP OR NOT
-	#install_tlp
-	
-
 }
-
-
-
 
 install_jetbrains(){
  cd /home/$username/Downloads/ || exit
@@ -198,4 +144,3 @@ tweak_gnome
 dnf_tasks
 install_flatpaks
 disable_services
-

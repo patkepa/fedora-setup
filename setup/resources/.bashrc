@@ -55,6 +55,11 @@ alias reload='source ~/.bashrc'
 # FUN
 alias weather="curl wttr.in/Rzeszów"
 
+# Golang Configuration
+export GO_PATH=~/go
+export PATH=$PATH:/$GO_PATH/bin
+
+# STARTUP
 on_startup()
 {
 	now=$(date +"%T")
@@ -62,6 +67,5 @@ on_startup()
 	echo "$now"
 }
 on_startup
-
 
 export PS1="[\[$(tput sgr0)\]\[\033[38;5;160m\]\u\[$(tput sgr0)\]@\[$(tput sgr0)\]\[\033[38;5;11m\]\h\[$(tput sgr0)\] \W]\\$ \[$(tput sgr0)\]"
