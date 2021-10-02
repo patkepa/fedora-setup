@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 # VARIABLES
-readonly username =  who -m | awk '{print $1;}'
-
+readonly username = $SUDO_USER
 
 readonly dnf_remove=("gnome-contacts" "gnome-photos" "rhytmbox" "totem" "firefox")
 readonly dnf_install=("install gnome-tweaks" "gnome-extensions-app" "cabextract lzip p7zip p7zip-plugins unrar" "vlc" "toolbox" "steam" "youtube-dl" "bat" "exa" "procs" "htop" "fd-find" "ffmpegthumbnailer" "ImageMagick")

@@ -11,9 +11,9 @@ Making dconf backups and restoring them.
 ```bash
 git clone https://github.com/patryk-kepa/fedora-setup
 cd fedora-setup/setup
-sudo bash setup.sh
+sudo bash fedora-setup/setup/setup.sh
 ```
-
+ss
 # Wine
 ```bash
 sudo dnf -y install dnf-plugins-core
